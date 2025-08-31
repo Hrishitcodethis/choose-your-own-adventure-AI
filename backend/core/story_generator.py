@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 
@@ -16,9 +16,9 @@ class StoryGenerator:
 
     @classmethod
     def _get_llm(cls):
-        gemini_api_key = os.getenv("GEMINI_API_KEY")
+        openai_api_key = os.getenv("OPENAI_API_KEY")
 
-        return ChatGoogleGenerativeAI(model="gemini-1.5-pro",api_key=gemini_api_key)
+        return ChatGoogleGenerativeAI(model="gpt-4o-mini",api_key=openai_api_key)
 
     @classmethod
     def generate_story(cls, db: Session, session_id: str, theme: str = "fantasy")-> Story:
